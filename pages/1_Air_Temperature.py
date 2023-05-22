@@ -2,10 +2,9 @@ import geopandas
 import matplotlib.pyplot as plt
 import pandas as pd
 import streamlit as st
-import altair as alt
 import numpy as np
 from sklearn.preprocessing import MinMaxScaler
-import seaborn as sns
+
 
 
 # Read in the shapefile using geopandas
@@ -69,6 +68,11 @@ temperature_cold = round(gdf_year["value"].min(), 2)
 # Specify the column to use for the coloring
 color_column = "value"
 
+
+
+
+
+
 # Plot the GeoDataFrame and fill it with values based on the colormap of the specified column
 
 with col1:
@@ -78,9 +82,11 @@ with col1:
     st.pyplot(fig)
 
     st.markdown(
-        f"<small> Warmest state in {year}: {warmest_state} with a mean temperature of {temperature_warm} C</small>",
+        f"Warmest state in {year}: {warmest_state} with a mean temperature of {temperature_warm} C",
         unsafe_allow_html=True,
     )
+    
+
 
 # sort values
 gdf_year_sorted = gdf_year.sort_values("value")
@@ -118,7 +124,7 @@ with col2:
         width=0.8,
     )
 
-    plt.ylabel("Air temperature in C")
+    plt.ylabel("Percentage in temperature difference")
     plt.xticks(rotation=75)
     plt.title(f"Relative temperatures in {year}")
     plt.show()
@@ -130,19 +136,30 @@ with col2:
         unsafe_allow_html=True,
     )
 
-merged_df_short = merged_df[["Bundesland", "Bundesland"]]
+name_list = df['Bundesland'].unique()
 
-my_order = merged_df_short.groupby("Bundesland")["value"].median().sort_values()
+#selected_bundesland = st.selectbox('Select a state', name_list)
+selected_states = st.multiselect('Select states', name_list, default='Hessen')
 
-pivoted_data = merged_df_short.pivot(index=None, columns="Bundesland", values="value")
+#selected_states = ['Hessen', 'Bayern']
 
 
-fig4, ax = plt.subplots(figsize=(10, 3))
-ax = sns.boxplot(data=pivoted_data, orient="v", palette="coolwarm", linewidth=0.5)
-ax.set_ylabel("Air temperature in C")
-# Rotate x-axis labels by 90 degrees
-ax.set_xticklabels(ax.get_xticklabels(), rotation=75)
-# Remove x-axis label
-ax.set_xlabel("")
-ax.set(title="Boxplot of air temperature distribution from 1881 to 2022")
-st.pyplot(fig4)
+if selected_states:
+    subset = df[df['Bundesland'].isin(selected_states)]
+    subset = subset[subset['date'] != 2022]
+    grouped_data = subset.groupby('Bundesland')
+    fig4 = plt.figure(figsize=(10,6))
+
+    for name, group in grouped_data:
+        plt.plot(group['date'],group['value'], label=name)
+        plt.ylabel('Yearly mean air temperature in Celcius')
+
+    plt.legend()  
+    plt.show()
+    st.pyplot(fig4)
+    
+else:
+    plt.show()
+    # Display an empty figure as a placeholder
+    st.pyplot(plt.figure())
+    

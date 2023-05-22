@@ -2,7 +2,13 @@ import pandas as pd
 import os
 
 
-def merge_textfiles(directory_path):
+def merge_textfiles(directory_path,name='merged.txt'):
+    """merges multiple txt files into one and saves it.
+
+    Args:
+        directory_path (_type_): _description_
+        name (str, optional): _description_. Defaults to 'merged.txt'.
+    """
     # Create an empty string to store the merged data
     merged_data = ""
     # Loop through all files in the directory
@@ -21,11 +27,13 @@ def merge_textfiles(directory_path):
 
     with open(
         os.path.join(
-            r"C:\Users\paulh\Desktop\Weather\data\merged\merged_sunshine_duration.txt"
+            rf"C:\Users\paulh\Desktop\Weather\data\merged\{name}"
         ),
         "w",
     ) as file:
         file.write(merged_data)
+
+
 
 
 def yearlyAverageDataframe(directory_path):

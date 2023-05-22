@@ -1,10 +1,11 @@
 from src.data import functions as func
+import sys
+sys.path.append("c:/Users/paulh/Desktop/Weather")
 
 
-# Set the directory path where the text files are located
-directory_path_txt = r"C:\Users\paulh\Desktop\Weather\data\sunshine_duration"
+directory_path_txt = r"C:\Users\paulh\Desktop\Weather\data\air_temp_mean"
 
-func.merge_textfiles(directory_path_txt)
+func.merge_textfiles(directory_path_txt, "merged")
 
 
 directory_path = r"C:\Users\paulh\Desktop\Weather\data\merged\merged_air_temp_mean.txt"
