@@ -4,14 +4,21 @@ import pandas as pd
 import streamlit as st
 import numpy as np
 from sklearn.preprocessing import MinMaxScaler
-#from pathlib import Path
+import os
+cwd = os.getcwd()
+
+path = r".\.\data\vg2500_geo84\vg2500_bld.shp"
 
 
+#import fiona
+#with fiona.open(path) as shp:
+#   gdf = geopandas.read_file(path)
 
-# Read in the shapefile using geopandas
-path = r"C:\Users\paulh\Desktop\Weather\data\vg2500_geo84\vg2500_bld.shp"
-#path = r".\data\vg2500_geo84\vg2500_bld.shp"
-#path = Path(".\data\vg2500_geo84\vg2500_bld.shp")
+path = os.path.join(cwd, cwd + r"\data\vg2500_geo84", "vg2500_bld.shp")
+
+#print(path)
+
+#path = r"C:\Users\paulh\Desktop\Weather\data\vg2500_geo84\vg2500_bld.shp"
 
 gdf = geopandas.read_file(path)
 
@@ -22,8 +29,11 @@ gdf = gdf.rename({"GEN": "Bundesland"}, axis=1)
 gdf = gdf[~gdf["Bundesland"].isin(["Hamburg", "Berlin", "Bremen"])]
 
 
+#path2 = os.path.join(cwd, cwd + r"\data\pickle", "air_temp_mean.pkl")
+
 df = pd.read_pickle(r"C:\Users\paulh\Desktop\Weather\data\pickle\air_temp_mean.pkl")
-#df = pd.read_pickle(r".\data\pickle\air_temp_mean.pkl")
+
+#df = pd.read_pickle(path2)
 
 
 df["Bundesland"] = df["Bundesland"].replace(
