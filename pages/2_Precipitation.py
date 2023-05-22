@@ -7,7 +7,9 @@ import numpy as np
 
 
 # Read in the shapefile using geopandas
-path = r"C:\Users\paulh\Desktop\Weather\data\vg2500_geo84\vg2500_bld.shp"
+#path = r"C:\Users\paulh\Desktop\Weather\data\vg2500_geo84\vg2500_bld.shp"
+path = r".\data\vg2500_geo84\vg2500_bld.shp"
+
 gdf = geopandas.read_file(path)
 
 gdf = gdf[["GEN", "geometry"]]
@@ -17,7 +19,8 @@ gdf = gdf.rename({"GEN": "Bundesland"}, axis=1)
 gdf = gdf[~gdf["Bundesland"].isin(["Hamburg", "Berlin", "Bremen"])]
 
 
-df = pd.read_pickle(r"C:\Users\paulh\Desktop\Weather\data\pickle\precipitation.pkl")
+#df = pd.read_pickle(r"C:\Users\paulh\Desktop\Weather\data\pickle\precipitation.pkl")
+df = pd.read_pickle(r".\data\pickle\air_temp_mean.pkl")
 
 
 df["Bundesland"] = df["Bundesland"].replace(
