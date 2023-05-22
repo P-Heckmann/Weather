@@ -1,0 +1,101 @@
+""" merged_df_short = merged_df[["Bundesland", "Bundesland"]]
+
+my_order = merged_df_short.groupby("Bundesland")["value"].median().sort_values()
+
+pivoted_data = merged_df_short.pivot(index=None, columns="Bundesland", values="value")
+
+
+fig4, ax = plt.subplots(figsize=(10, 3))
+ax = sns.boxplot(data=pivoted_data, orient="v", palette="coolwarm", linewidth=0.5)
+ax.set_ylabel("Air temperature in C")
+# Rotate x-axis labels by 90 degrees
+ax.set_xticklabels(ax.get_xticklabels(), rotation=75)
+# Remove x-axis label
+ax.set_xlabel("")
+ax.set(title="Boxplot of air temperature distribution from 1881 to 2022")
+st.pyplot(fig4)
+ """
+
+
+ Bundesland_user = 'Brandenburg'
+
+name_list = df['Bundesland'].unique()
+
+selected_bundesland = st.selectbox('Select a state', name_list)
+
+subset = df.loc[df['Bundesland'] == selected_bundesland]
+
+subset = subset[subset['date'] != 2022]
+
+plt.plot(subset['date'],subset['value'])
+plt.ylabel('Yearly mean air temperature in Celcius')
+plt.show()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+if selected_states:
+
+    for state in selected_states:
+        subset = df.loc[df['Bundesland'] == state]
+        #subset = subset[subset['date'] != 2022]
+        
+        for sub in subset
+        fig4, ax = plt.subplots(figsize=(10, 5))
+        ax.plot(subset['date'],subset['value'], label=state)
+        #ax.plot(subset['date'],subset['value'])
+        ax.set_ylabel('Yearly mean air temperature in Celcius')
+    
+    plt.legend()
+    st.pyplot(fig4)
+    
+else:
+    # Display an empty figure as a placeholder
+    st.pyplot(plt.figure())
+
+
+
+
+#ax.plot(subset['date'],subset['value'])
+#ax.set_ylabel('Yearly mean air temperature in Celcius')
+#st.pyplot(fig)
+
+
+
+
+
+
+
+
+
+
+
+if selected_states:
+    subset = df[df['Bundesland'].isin(selected_states)]
+    subset = subset[subset['date'] != 2022]
+    grouped_data = subset.groupby('Bundesland')
+    
+    for name, group in grouped_data:
+        #fig4, ax = plt.subplots(figsize=(10, 5))
+        plt.plot(group['date'],group['value'], label=name)
+        #ax.set_ylabel('Yearly mean air temperature in Celcius')
+        
+        #plt.plot(group['date'], group['value'], label=name)
+        plt.legend()  
+        plt.show()  
+        #st.pyplot(fig4)
+else:
+    # Display an empty figure as a placeholder
+    #st.pyplot(plt.figure())
+    plt.show()
