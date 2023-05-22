@@ -112,7 +112,6 @@ tzlocal=4.3=pypi_0
 urllib3=1.26.15=pypi_0
 validators=0.20.0=pypi_0
 vc=14.2=h21ff451_1
-vs2015_runtime=14.27.29016=h5e58377_2
 watchdog=3.0.0=pypi_0
 wcwidth=0.2.6=pyhd8ed1ab_0
 wheel=0.38.4=py39haa95532_0
