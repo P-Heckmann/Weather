@@ -14,7 +14,7 @@ path = r".\.\data\vg2500_geo84\vg2500_bld.shp"
 #with fiona.open(path) as shp:
 #   gdf = geopandas.read_file(path)
 
-path = os.path.join(cwd, cwd + r"\data\vg2500_geo84", "vg2500_bld.shp")
+#path = os.path.join(cwd, cwd + r"\data\vg2500_geo84", "vg2500_bld.shp")
 
 #print(path)
 
