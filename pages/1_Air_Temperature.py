@@ -4,18 +4,32 @@ import pandas as pd
 import streamlit as st
 import numpy as np
 from sklearn.preprocessing import MinMaxScaler
+from pathlib import Path
 import os
 cwd = os.getcwd()
+#import os
+#os.environ['PROJ_LIB'] = r'C:\Users\paulh\anaconda3\envs\weather-env\Library\share\proj'
+#os.environ['GDAL_DATA'] = r'C:\Users\paulh\anaconda3\envs\weather-env\Library\share\gdal'
 
-#path = r".\.\data\vg2500_geo84\vg2500_bld.shp"
+#path = Path(r".\.\data\vg2500_geo84\vg2500_bld.shp")
 
-path = r".\.\myshpfile.geojson"
+#path = Path(r".\.\myshpfile.geojson")
+
+path = Path(r"C:\Users\paulh\Desktop\Weather\myshpfile.geojson")
+
+
+#path = r"C:\Users\paulh\Desktop\Weather\data\vg2500_geo84\vg2500_bld.shp"
+
+
+
+#path = os.path.join(cwd, cwd + r"\data\vg2500_geo84", "vg2500_bld.shp")
+
 
 import fiona
 with fiona.open(path) as shp:
    gdf = geopandas.read_file(path)
 
-#path = os.path.join(cwd, cwd + r"\data\vg2500_geo84", "vg2500_bld.shp")
+
 
 #print(path)
 
