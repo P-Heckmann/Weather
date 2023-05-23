@@ -11,9 +11,9 @@ cwd = os.getcwd()
 
 path = r".\.\myshpfile.geojson"
 
-#import fiona
-#with fiona.open(path) as shp:
-#   gdf = geopandas.read_file(path)
+import fiona
+with fiona.open(path) as shp:
+   gdf = geopandas.read_file(path)
 
 #path = os.path.join(cwd, cwd + r"\data\vg2500_geo84", "vg2500_bld.shp")
 
@@ -21,7 +21,7 @@ path = r".\.\myshpfile.geojson"
 
 #path = r"C:\Users\paulh\Desktop\Weather\data\vg2500_geo84\vg2500_bld.shp"
 
-gdf = geopandas.read_file(path)
+#gdf = geopandas.read_file(path)
 
 gdf = gdf[["GEN", "geometry"]]
 
