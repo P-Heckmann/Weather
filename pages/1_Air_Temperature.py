@@ -1,4 +1,4 @@
-import geopandas
+import geopandas as gpd
 import matplotlib.pyplot as plt
 import pandas as pd
 import streamlit as st
@@ -9,6 +9,9 @@ import os
 cwd = os.getcwd()
 
 
+
+
+
 #import os
 #os.environ['PROJ_LIB'] = r'C:\Users\paulh\anaconda3\envs\weather-env\Library\share\proj'
 #os.environ['GDAL_DATA'] = r'C:\Users\paulh\anaconda3\envs\weather-env\Library\share\gdal'
@@ -17,9 +20,9 @@ cwd = os.getcwd()
 
 #path = Path(r".\.\myshpfile.geojson")
 
-#path = Path(r"C:\Users\paulh\Desktop\Weather\myshpfile.geojson")
+path = Path(r"C:\Users\paulh\Desktop\Weather\myshpfile.geojson")
 
-path = Path(r"C:\Users\paulh\Desktop\Weather\data\vg2500_geo84\vg2500_bld.shp")
+#path = Path(r"C:\Users\paulh\Desktop\Weather\data\vg2500_geo84\vg2500_bld.shp")
 
 #path = r"C:\Users\paulh\Desktop\Weather\data\vg2500_geo84\vg2500_bld.shp"
 
@@ -28,17 +31,23 @@ path = Path(r"C:\Users\paulh\Desktop\Weather\data\vg2500_geo84\vg2500_bld.shp")
 #path = os.path.join(cwd, cwd + r"\data\vg2500_geo84", "vg2500_bld.shp")
 
 
-import fiona
-with fiona.open(path) as shp:
-   gdf = geopandas.read_file(path, enabled_drivers=["ESRI Shapefile"])
+#import fiona
+#with fiona.open(path) as shp:
+#   gdf = gpd.read_file(path, enabled_drivers=["ESRI Shapefile"])
 
+@st.cache_data() 
+def get_data():
+    gdf = gpd.read_file(path)
+    return gdf
 
+gdf = get_data()
 
 #print(path)
 
 #path = r"C:\Users\paulh\Desktop\Weather\data\vg2500_geo84\vg2500_bld.shp"
 
-#gdf = geopandas.read_file(path)
+
+#gdf = gpd.read_file(path)
 
 gdf = gdf[["GEN", "geometry"]]
 
