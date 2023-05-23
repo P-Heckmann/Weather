@@ -9,7 +9,7 @@ from streamlit_folium import st_folium
 
 #path = Path("./data/footprint.csv")
 
-eco_footprints = pd.read_csv(r"C:\Users\paulh\Desktop\Weather\data\footprint.csv")
+eco_footprints = pd.read_csv(r"Data\footprint.csv")
 
 max_eco_footprint = eco_footprints["Ecological footprint"].max()
 political_countries_url = (
