@@ -19,8 +19,9 @@ cwd = os.getcwd()
 
 #path = Path(r"C:\Users\paulh\Desktop\Weather\myshpfile.geojson")
 
+path = Path(r"C:\Users\paulh\Desktop\Weather\data\vg2500_geo84\vg2500_bld.shp")
 
-path = r"C:\Users\paulh\Desktop\Weather\data\vg2500_geo84\vg2500_bld.shp"
+#path = r"C:\Users\paulh\Desktop\Weather\data\vg2500_geo84\vg2500_bld.shp"
 
 
 
