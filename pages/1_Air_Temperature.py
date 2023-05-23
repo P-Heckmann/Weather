@@ -7,8 +7,9 @@ from sklearn.preprocessing import MinMaxScaler
 import os
 cwd = os.getcwd()
 
-path = r".\.\data\vg2500_geo84\vg2500_bld.shp"
+#path = r".\.\data\vg2500_geo84\vg2500_bld.shp"
 
+path = r".\.\myshpfile.geojson"
 
 #import fiona
 #with fiona.open(path) as shp:
