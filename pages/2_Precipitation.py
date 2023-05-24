@@ -4,11 +4,10 @@ import pandas as pd
 import streamlit as st
 from sklearn.preprocessing import MinMaxScaler
 import numpy as np
+from pathlib import Path
 
 
-# Read in the shapefile using geopandas
-path = r"C:\Users\paulh\Desktop\Weather\data\vg2500_geo84\vg2500_bld.shp"
-#path = r".\data\vg2500_geo84\vg2500_bld.shp"
+path = Path(r"././data/vg2500_geo84/vg2500_bld.shp")
 
 gdf = geopandas.read_file(path)
 
