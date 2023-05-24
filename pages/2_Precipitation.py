@@ -18,8 +18,10 @@ gdf = gdf.rename({"GEN": "Bundesland"}, axis=1)
 gdf = gdf[~gdf["Bundesland"].isin(["Hamburg", "Berlin", "Bremen"])]
 
 
-df = pd.read_pickle(r"C:\Users\paulh\Desktop\Weather\data\pickle\precipitation.pkl")
-#df = pd.read_pickle(r".\data\pickle\air_temp_mean.pkl")
+
+df_path = Path(r"././data/pickle/precipitation.pkl")
+
+df = pd.read_pickle(df_path)
 
 
 df["Bundesland"] = df["Bundesland"].replace(
