@@ -11,16 +11,7 @@ cwd = os.getcwd()
 
 path = Path(r"././data/vg2500_geo84/vg2500_bld.shp")
 
-
-
-#@st.cache_data() 
-#def get_data():
-#    gdf = gpd.read_file(path)
-#    return gdf
-
-#gdf = get_data()
-
-
+# loading the geospatial data
 gdf = gpd.read_file(path)
 
 gdf = gdf[["GEN", "geometry"]]
@@ -32,6 +23,7 @@ gdf = gdf[~gdf["Bundesland"].isin(["Hamburg", "Berlin", "Bremen"])]
 
 df_path = Path(r"././data/pickle/air_temp_mean.pkl")
 
+# loading the data
 df = pd.read_pickle(df_path)
 
 

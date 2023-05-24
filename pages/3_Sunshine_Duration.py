@@ -4,13 +4,14 @@ import pandas as pd
 import streamlit as st
 from sklearn.preprocessing import MinMaxScaler
 import numpy as np
+from pathlib import Path
 
 
-# Read in the shapefile using geopandas
-path = r"C:\Users\paulh\Desktop\Weather\data\vg2500_geo84\vg2500_bld.shp"
-#path = r".\data\vg2500_geo84\vg2500_bld.shp"
+path = Path(r"././data/vg2500_geo84/vg2500_bld.shp")
 
+# loading the geospatial data
 gdf = geopandas.read_file(path)
+
 
 gdf = gdf[["GEN", "geometry"]]
 
@@ -19,9 +20,10 @@ gdf = gdf.rename({"GEN": "Bundesland"}, axis=1)
 gdf = gdf[~gdf["Bundesland"].isin(["Hamburg", "Berlin", "Bremen"])]
 
 
-df = pd.read_pickle(r"C:\Users\paulh\Desktop\Weather\data\pickle\sunshine_duration.pkl")
-#df = pd.read_pickle(r".\data\pickle\air_temp_mean.pkl")
+df_path = Path(r"././data/pickle/sunshine_duration.pkl")
 
+# loading the geospatial data
+df = pd.read_pickle(df_path)
 
 df["Bundesland"] = df["Bundesland"].replace(
     ["Thueringen", "Baden-Wuerttemberg"], ["Thüringen", "Baden-Württemberg"]

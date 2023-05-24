@@ -9,6 +9,7 @@ from pathlib import Path
 
 path = Path(r"././data/vg2500_geo84/vg2500_bld.shp")
 
+# loading the geospatial data
 gdf = geopandas.read_file(path)
 
 gdf = gdf[["GEN", "geometry"]]
@@ -21,6 +22,7 @@ gdf = gdf[~gdf["Bundesland"].isin(["Hamburg", "Berlin", "Bremen"])]
 
 df_path = Path(r"././data/pickle/precipitation.pkl")
 
+# loading the geospatial data
 df = pd.read_pickle(df_path)
 
 
