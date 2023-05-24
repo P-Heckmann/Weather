@@ -58,7 +58,12 @@ gdf = gdf[~gdf["Bundesland"].isin(["Hamburg", "Berlin", "Bremen"])]
 
 #path2 = os.path.join(cwd, cwd + r"\data\pickle", "air_temp_mean.pkl")
 
-df = pd.read_pickle(r"C:\Users\paulh\Desktop\Weather\data\pickle\air_temp_mean.pkl")
+#df = pd.read_pickle(r"C:\Users\paulh\Desktop\Weather\data\pickle\air_temp_mean.pkl")
+
+df_path = Path(r"././data/pickle/air_temp_mean.pkl")
+
+df = pd.read_pickle(df_path)
+
 
 #df = pd.read_pickle(path2)
 
