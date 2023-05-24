@@ -16,11 +16,11 @@ cwd = os.getcwd()
 #os.environ['PROJ_LIB'] = r'C:\Users\paulh\anaconda3\envs\weather-env\Library\share\proj'
 #os.environ['GDAL_DATA'] = r'C:\Users\paulh\anaconda3\envs\weather-env\Library\share\gdal'
 
-#path = Path(r".\.\data\vg2500_geo84\vg2500_bld.shp")
+path = Path(r"././data/vg2500_geo84/vg2500_bld.shp")
 
 #path = Path(r".\.\myshpfile.geojson")
 
-path = Path(r"C:\Users\paulh\Desktop\Weather\myshpfile.geojson")
+#path = Path(r"C:\Users\paulh\Desktop\Weather\myshpfile.geojson")
 
 #path = Path(r"C:\Users\paulh\Desktop\Weather\data\vg2500_geo84\vg2500_bld.shp")
 
