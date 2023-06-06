@@ -20,7 +20,7 @@ gdf = gdf[~gdf["Bundesland"].isin(["Hamburg", "Berlin", "Bremen"])]
 
 
 
-df_path = Path(r"././data/pickle/precipitation.pkl")
+df_path = Path(r"././data/pickle/precipitation_mean.pkl")
 
 # loading the geospatial data
 df = pd.read_pickle(df_path)
