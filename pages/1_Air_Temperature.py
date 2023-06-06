@@ -14,10 +14,13 @@ path = Path(r"././data/vg2500_geo84/vg2500_bld.shp")
 # loading the geospatial data
 gdf = gpd.read_file(path)
 
+# Select the "GEN" and "geometry" columns from the DataFrame gdf
 gdf = gdf[["GEN", "geometry"]]
 
+# Rename the "GEN" column to "Bundesland" in the DataFrame gdf
 gdf = gdf.rename({"GEN": "Bundesland"}, axis=1)
 
+# Remove rows where the value in the "Bundesland" column is "Hamburg", "Berlin", or "Bremen" from the DataFrame gdf
 gdf = gdf[~gdf["Bundesland"].isin(["Hamburg", "Berlin", "Bremen"])]
 
 
@@ -26,9 +29,10 @@ df_path = Path(r"././data/pickle/air_temp_mean.pkl")
 # loading the data
 df = pd.read_pickle(df_path)
 
-
+# Replace "Thueringen" with "Thüringen" and "Baden-Wuerttemberg" with "Baden-Württemberg"
 df["Bundesland"] = df["Bundesland"].replace(
-    ["Thueringen", "Baden-Wuerttemberg"], ["Thüringen", "Baden-Württemberg"]
+    ["Thueringen", "Baden-Wuerttemberg"],
+    ["Thüringen", "Baden-Württemberg"]
 )
 
 
@@ -43,9 +47,7 @@ max_year = int(merged_df["date"].max())
 # Define the default year for the slider
 default_year = max_year
 
-
 st.markdown("##### Mean Air Temperature (yearly, since 1881)")
-# st.sidebar.header("Air temperature")
 
 # Add a slider for the year of the map
 help1 = """
@@ -53,18 +55,24 @@ Move the read circle on the slider to select a year.
 The oldest year selectable is 1881, the youngest 2022.
 For 2022, there is only data for January, February and March.
 """
-year = st.slider("Please choose a year.", min_year, max_year, default_year, help=help1)
 
+year = st.slider("Please choose a year.", min_year, max_year, default_year, help=help1)
 
 # Split the page into two columns
 col1, col2 = st.columns(2)
-
 
 # Filter the GeoDataFrame based on the selected year
 gdf_year = merged_df[merged_df["date"] == year]
 
 
-warmest_state = gdf_year.loc[gdf_year["value"].idxmax(), "Bundesland"]
+# Find the row index of the maximum value in the "value" column of the DataFrame gdf_year
+max_value_index = gdf_year["value"].idxmax()
+
+# Retrieve the value in the "Bundesland" column for the row with the maximum value
+warmest_state = gdf_year.loc[max_value_index, "Bundesland"]
+
+
+#warmest_state = gdf_year.loc[gdf_year["value"].idxmax(), "Bundesland"]
 coldest_state = gdf_year.loc[gdf_year["value"].idxmin(), "Bundesland"]
 
 temperature_warm = round(gdf_year["value"].max(), 2)
@@ -73,10 +81,6 @@ temperature_cold = round(gdf_year["value"].min(), 2)
 
 # Specify the column to use for the coloring
 color_column = "value"
-
-
-
-
 
 
 # Plot the GeoDataFrame and fill it with values based on the colormap of the specified column
