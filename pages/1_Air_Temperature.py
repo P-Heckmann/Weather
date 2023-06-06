@@ -64,27 +64,44 @@ col1, col2 = st.columns(2)
 # Filter the GeoDataFrame based on the selected year
 gdf_year = merged_df[merged_df["date"] == year]
 
-
 # Find the row index of the maximum value in the "value" column of the DataFrame gdf_year
 max_value_index = gdf_year["value"].idxmax()
 
 # Retrieve the value in the "Bundesland" column for the row with the maximum value
 warmest_state = gdf_year.loc[max_value_index, "Bundesland"]
 
+# Find the row index of the minimum value in the "value" column of the DataFrame gdf_year
+min_value_index = gdf_year["value"].idxmin()
 
-#warmest_state = gdf_year.loc[gdf_year["value"].idxmax(), "Bundesland"]
-coldest_state = gdf_year.loc[gdf_year["value"].idxmin(), "Bundesland"]
+# Retrieve the value in the "Bundesland" column for the row with the minimum value
+coldest_state = gdf_year.loc[min_value_index, "Bundesland"]
 
-temperature_warm = round(gdf_year["value"].max(), 2)
-temperature_cold = round(gdf_year["value"].min(), 2)
+# Find the maximum value in the "value" column of the DataFrame gdf_year
+max_temperature = gdf_year["value"].max()
 
+# Round the maximum temperature value to 2 decimal places
+temperature_warm = round(max_temperature, 2)
+
+# Find the minimum value in the "value" column of the DataFrame gdf_year
+min_temperature = gdf_year["value"].min()
+
+# Round the minimum temperature value to 2 decimal places
+temperature_cold = round(min_temperature, 2)
 
 # Specify the column to use for the coloring
 color_column = "value"
 
+# sort values
+gdf_year_sorted = gdf_year.sort_values("value")
+
+# Create a MinMaxScaler object
+scaler = MinMaxScaler()
+
+# Normalize the 'value' column
+gdf_year_sorted["normalized_value"] = scaler.fit_transform(gdf_year_sorted[["value"]])
+
 
 # Plot the GeoDataFrame and fill it with values based on the colormap of the specified column
-
 with col1:
     fig, ax = plt.subplots(figsize=(10, 10))
     gdf_year.plot(column=color_column, cmap="coolwarm", ax=ax, legend=True)
@@ -97,15 +114,6 @@ with col1:
     )
     
 
-
-# sort values
-gdf_year_sorted = gdf_year.sort_values("value")
-
-# Create a MinMaxScaler object
-scaler = MinMaxScaler()
-
-# Normalize the 'value' column
-gdf_year_sorted["normalized_value"] = scaler.fit_transform(gdf_year_sorted[["value"]])
 
 
 with col2:
@@ -148,10 +156,7 @@ with col2:
 
 name_list = df['Bundesland'].unique()
 
-#selected_bundesland = st.selectbox('Select a state', name_list)
 selected_states = st.multiselect('Select states', name_list, default='Hessen')
-
-#selected_states = ['Hessen', 'Bayern']
 
 
 if selected_states:
